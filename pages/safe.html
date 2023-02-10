@@ -1,0 +1,158 @@
+<!-- 账号与安全页面 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20001030314王浩然</title>
+    <style>
+        body,ul,p{
+            padding: 0;
+            margin: 0;
+        }
+
+        ul{
+            list-style: none;
+        }
+
+        a{
+            text-decoration: none;
+            color: #000;
+            display: block;
+            color: #999;
+        }
+             
+        body{
+            background: rgb(239,239,239);
+        }
+
+        .header{
+            background: #999;
+            height: 50px;
+            font-size: 17px;
+            color: white;
+            padding-left: 19px;
+            padding-right: 20px;
+            text-align: center;
+            line-height: 40px;     
+        }
+             
+        .header>a{ 
+            color: white;
+            float: left;
+        }
+
+        #fm>div{
+            display: flex;
+            height: 32px;
+            line-height: 32px;
+            margin: 5px;
+        }
+
+        #fm label{
+            width: 150px;
+            font-size: 14px;
+            text-align: center;
+            padding-right: 10px;
+        }
+
+        .input{
+            width: 140px;
+            margin-top: 5px;
+            color: #f00;
+        }
+
+        .error{
+            display: inline-block;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+            color: #0f0;
+            display: none;
+        }
+
+        #fm>div:last-child{
+            margin-left: 100px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="settings.html"> <</a>设置 
+    </div>
+    <form action="http://www.baidu.com" method="post" id="fm" name="fm" onsubmit="return checkform()">
+        <div>
+            <label for="user">账号名称：</label>
+            <input type="text" id="user" name="user" class="input">
+            <span class="error">账号名应为4-8位</span>
+        </div>
+        <div>
+            <label for="pwd">新的密码：</label>
+            <input type="password" id="pwd" name="pwd" class="input">
+            <span class="error">新的密码应为8-16位</span>
+        </div>
+        <div>
+            <label for="pwd2">重复密码：</label>
+            <input type="password" id="pwd2" name="pwd2" class="input">
+            <span class="error">两次密码应为相同</span>
+        </div>
+        <div>
+            <input type="submit" value="确认修改">
+        </div>       
+    </form>   
+    <script>
+        // 写入js——表单校验
+        var user = document.getElementById("user");
+        var error = document.getElementsByClassName("error");
+        var pwd = document.getElementById("pwd");
+        var pwd2 = document.getElementById("pwd2");
+        user.onchange = checkuser;/* 函数名，不是调用函数。 */
+        pwd.onchange = checkpwd;
+        pwd2.onchange = checkpwd2;
+        function checkuser(){
+            if(user.value.length >= 4 && user.value.length <= 8){
+                error[0].style.display = "none";
+                return 1;
+            }
+            else{
+                error[0].style.display = "block";
+                return 0;
+            }
+        }
+
+        function checkpwd(){
+            if(pwd.value.length > 8 && pwd.value.length < 16){
+                error[1].style.display = "none";
+                return 1;
+            }
+            else{
+                error[1].style.display = "block";
+                return 0;
+            }
+        }
+
+        function checkpwd2(){
+            if(pwd.value == pwd2.value){
+                error[2].style.display = "none";
+                return 1;
+            }
+            else{
+                error[2].style.display = "block";
+                return 0;
+            }
+        }
+
+        function checkform(){
+            var result = checkuser()*checkpwd()*checkpwd2();
+            if(result === 0){
+                return false;
+            }
+            else{
+                true;
+            }
+        }
+    </script>
+</body>
+</html>
